@@ -10,132 +10,132 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class PreparedStatementWrapper {
 
-    private final PreparedStatement stmt;
+  private final PreparedStatement stmt;
 
-    public PreparedStatementWrapper(PreparedStatement stmt) {
-        checkArgument(stmt != null);
-        this.stmt = stmt;
-    }
+  public PreparedStatementWrapper(PreparedStatement stmt) {
+    checkArgument(stmt != null);
+    this.stmt = stmt;
+  }
 
-    public void setBool(final int pos, final boolean val) throws SQLException {
-        stmt.setBoolean(pos, val);
-    }
+  public void setBool(final int pos, final boolean val) throws SQLException {
+    stmt.setBoolean(pos, val);
+  }
 
-    public void setBoolOrNull(final int pos, final Boolean val) throws SQLException {
-        if (val == null)
-            stmt.setNull(pos, Types.BOOLEAN);
-        else
-            setBool(pos, val.booleanValue());
-    }
+  public void setBoolOrNull(final int pos, final Boolean val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.BOOLEAN);
+    else
+      setBool(pos, val.booleanValue());
+  }
 
-    public void setByte(final int pos, final byte val) throws SQLException {
-        stmt.setByte(pos, val);
-    }
+  public void setByte(final int pos, final byte val) throws SQLException {
+    stmt.setByte(pos, val);
+  }
 
-    public void setByteOrNull(final int pos, final Byte val) throws SQLException {
-        if (val == null)
-            stmt.setNull(pos, Types.TINYINT);
-        else
-            setByte(pos, val.byteValue());
-    }
-    
-    public void setDate(final int pos, final Date val) throws SQLException {
-        setDateOrNull(pos, val == null ? new Date(0) : val);
-    }
+  public void setByteOrNull(final int pos, final Byte val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.TINYINT);
+    else
+      setByte(pos, val.byteValue());
+  }
 
-    public void setDateOrNull(final int pos, final Date val) throws SQLException {
-        if (val == null)
-            stmt.setNull(pos, Types.DATE);
-        else
-            stmt.setDate(pos, new java.sql.Date(val.getTime()));
-    }
+  public void setDate(final int pos, final Date val) throws SQLException {
+    setDateOrNull(pos, val == null ? new Date(0) : val);
+  }
 
-    public void setDateTime(final int pos, final Date val) throws SQLException {
-        setDateTimeOrNull(pos, val == null ? new Date(0) : val);
-    }
+  public void setDateOrNull(final int pos, final Date val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.DATE);
+    else
+      stmt.setDate(pos, new java.sql.Date(val.getTime()));
+  }
 
-    public void setDateTimeOrNull(final int pos, final Date val) throws SQLException {
-        if (val == null)
-            stmt.setNull(pos, Types.TIMESTAMP);
-        else
-            stmt.setTimestamp(pos, new Timestamp(val.getTime()));
-    }
+  public void setDateTime(final int pos, final Date val) throws SQLException {
+    setDateTimeOrNull(pos, val == null ? new Date(0) : val);
+  }
 
-    public void setDouble(final int pos, final double v) throws SQLException {
-        stmt.setDouble(pos, v);
-    }
+  public void setDateTimeOrNull(final int pos, final Date val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.TIMESTAMP);
+    else
+      stmt.setTimestamp(pos, new Timestamp(val.getTime()));
+  }
 
-    public void setDoubleOrNull(final int pos, final Double v) throws SQLException {
-        if (v == null)
-            stmt.setNull(pos, Types.DOUBLE);
-        else
-            stmt.setDouble(pos, v.doubleValue());
-    }
+  public void setDouble(final int pos, final double v) throws SQLException {
+    stmt.setDouble(pos, v);
+  }
 
-    public void setFloat(final int pos, final float v) throws SQLException {
-        stmt.setFloat(pos, v);
-    }
+  public void setDoubleOrNull(final int pos, final Double v) throws SQLException {
+    if (v == null)
+      stmt.setNull(pos, Types.DOUBLE);
+    else
+      stmt.setDouble(pos, v.doubleValue());
+  }
 
-    public void setFloatOrNull(final int pos, final Float v) throws SQLException {
-        if (v == null)
-            stmt.setNull(pos, Types.FLOAT);
-        else
-            stmt.setFloat(pos, v.floatValue());
-    }
+  public void setFloat(final int pos, final float v) throws SQLException {
+    stmt.setFloat(pos, v);
+  }
 
-    public void setInteger(final int pos, final int v) throws SQLException {
-        stmt.setInt(pos, v);
-    }
+  public void setFloatOrNull(final int pos, final Float v) throws SQLException {
+    if (v == null)
+      stmt.setNull(pos, Types.FLOAT);
+    else
+      stmt.setFloat(pos, v.floatValue());
+  }
 
-    public void setIntegerOrNull(final int pos, final Integer val) throws SQLException {
-        if (val == null)
-            stmt.setNull(pos, Types.INTEGER);
-        else
-            stmt.setInt(pos, val.intValue());
-    }
+  public void setInteger(final int pos, final int v) throws SQLException {
+    stmt.setInt(pos, v);
+  }
 
-    public void setLong(final int pos, final long v) throws SQLException {
-        stmt.setLong(pos, v);
-    }
+  public void setIntegerOrNull(final int pos, final Integer val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.INTEGER);
+    else
+      stmt.setInt(pos, val.intValue());
+  }
 
-    public void setLongOrNull(final int pos, final Long val) throws SQLException {
-        if (val == null)
-            stmt.setNull(pos, Types.BIGINT);
-        else
-            stmt.setLong(pos, val.longValue());
-    }
+  public void setLong(final int pos, final long v) throws SQLException {
+    stmt.setLong(pos, v);
+  }
 
-    public void setShort(final int pos, final short v) throws SQLException {
-        stmt.setShort(pos, v);
-    }
+  public void setLongOrNull(final int pos, final Long val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.BIGINT);
+    else
+      stmt.setLong(pos, val.longValue());
+  }
 
-    public void setShortOrNull(final int pos, final Short v) throws SQLException {
-        if (v == null)
-            stmt.setNull(pos, Types.SMALLINT);
-        else
-            stmt.setShort(pos, v.shortValue());
-    }
+  public void setShort(final int pos, final short v) throws SQLException {
+    stmt.setShort(pos, v);
+  }
 
-    public void setString(final int pos, final String val) throws SQLException {
-        setStringOrNull(pos, val == null ? "" : val);
-    }
+  public void setShortOrNull(final int pos, final Short v) throws SQLException {
+    if (v == null)
+      stmt.setNull(pos, Types.SMALLINT);
+    else
+      stmt.setShort(pos, v.shortValue());
+  }
 
-    public void setStringOrNull(final int pos, final String val) throws SQLException {
-        if (val == null)
-            stmt.setNull(pos, Types.VARCHAR);
-        else
-            stmt.setString(pos, val);
-    }
+  public void setString(final int pos, final String val) throws SQLException {
+    setStringOrNull(pos, val == null ? "" : val);
+  }
 
-    public void setTime(final int pos, final Date val) throws SQLException {
-        setTimeOrNull(pos, val == null ? new Date(0) : val);
-    }
+  public void setStringOrNull(final int pos, final String val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.VARCHAR);
+    else
+      stmt.setString(pos, val);
+  }
 
-    public void setTimeOrNull(final int pos, final Date val) throws SQLException {
-        if (val == null)
-            stmt.setNull(pos, Types.TIME);
-        else
-            stmt.setTime(pos, new java.sql.Time(val.getTime()));
-    }
+  public void setTime(final int pos, final Date val) throws SQLException {
+    setTimeOrNull(pos, val == null ? new Date(0) : val);
+  }
+
+  public void setTimeOrNull(final int pos, final Date val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.TIME);
+    else
+      stmt.setTime(pos, new java.sql.Time(val.getTime()));
+  }
 
 }

@@ -8,16 +8,16 @@ import org.xelasov.ejdbc.base.SqlUtils;
 
 public class DBPrintResultSet extends DBResultSet<Void> {
 
-    private final PrintStream out;
+  private final PrintStream out;
 
-    public DBPrintResultSet(PrintStream out) {
-        this.out = out;
-    }
+  public DBPrintResultSet(PrintStream out) {
+    this.out = out;
+  }
 
-    @Override
-    protected void consumeResultSet(ResultSetWrapper rsw) throws SQLException {
+  @Override
+  protected void consumeResultSet(ResultSetWrapper rsw) throws SQLException {
 
-        SqlUtils.printResultSet(rsw, out);
-    }
+    SqlUtils.printResultSet(rsw, out);
+  }
 
 }
