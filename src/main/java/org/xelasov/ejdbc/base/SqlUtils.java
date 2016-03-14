@@ -1,16 +1,10 @@
 package org.xelasov.ejdbc.base;
 
 import java.io.PrintStream;
-import java.lang.reflect.Field;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Types;
-import java.util.HashMap;
-import java.util.ServiceLoader;
 
 import com.google.common.base.Strings;
 import javax.sql.DataSource;
@@ -20,35 +14,6 @@ import org.slf4j.LoggerFactory;
 public class SqlUtils {
 
   private static final Logger log = LoggerFactory.getLogger(SqlUtils.class);
-
-  private static final HashMap<Integer, String> sqlTypes = new HashMap<Integer, String>();
-
-  static {
-    for (final Field f : Types.class.getDeclaredFields()) {
-      try {
-        sqlTypes.put(f.getInt(null), f.getName());
-      } catch (final IllegalArgumentException e) {
-      } catch (final IllegalAccessException e) {
-      }
-    }
-  }
-
-  public static String getSqlTypeName(int sqlType) {
-    return sqlTypes.get(sqlType);
-  }
-
-  public static void registerDrivers() {
-    final ServiceLoader<Driver> sl = ServiceLoader.load(java.sql.Driver.class);
-    for (Driver d : sl) {
-      try {
-        log.info("Registering JDBC driver {}", d.getClass().getName());
-        DriverManager.registerDriver(d);
-      } catch (SQLException e) {
-        log.error("Error registering driver", e);
-      }
-    }
-  }
-
 
   public static String buildFunctionCallString(String name, boolean hasRetVal, int paramCnt) {
     // { ? = call get_cnt(?) }
