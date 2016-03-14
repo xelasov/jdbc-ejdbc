@@ -11,7 +11,6 @@ import org.xelasov.ejdbc.base.ResultSetWrapper;
  * Converts ResultSet into a List of BeanT objects
  *
  * @param <BeanT>
- * @author alex
  */
 public class DBListResultSet<BeanT> extends DBResultSet<List<BeanT>> {
 
