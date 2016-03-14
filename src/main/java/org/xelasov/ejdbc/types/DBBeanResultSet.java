@@ -10,7 +10,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * processes ResultSet that contains 0 or 1 rows and converts it to null or an object of type BeanT
  *
- * @author alex
  */
 public class DBBeanResultSet<BeanT> extends DBResultSet<BeanT> {
 

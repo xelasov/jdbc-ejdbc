@@ -1,5 +1,6 @@
 package org.xelasov.ejdbc.base;
 
+import java.sql.Array;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.Date;
@@ -80,6 +81,14 @@ public class CallableStatementWrapper extends PreparedStatementWrapper {
   public Integer getIntegerOrNull(final int pos) throws SQLException {
     final int rv = cstmt.getInt(pos);
     return cstmt.wasNull() ? null : new Integer(rv);
+  }
+
+  public Array getArray(final int pos) throws SQLException {
+    return cstmt.getArray(pos);
+  }
+
+  public Array getArrayOrNull(final int pos) throws SQLException {
+    return cstmt.getArray(pos);
   }
 
   public long getLong(final int pos) throws SQLException {

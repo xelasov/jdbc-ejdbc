@@ -1,5 +1,6 @@
 package org.xelasov.ejdbc.base;
 
+import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -92,6 +93,17 @@ public class PreparedStatementWrapper {
       stmt.setNull(pos, Types.INTEGER);
     else
       stmt.setInt(pos, val.intValue());
+  }
+
+  public void setArray(final int pos, final Array v) throws SQLException {
+    stmt.setArray(pos, v);
+  }
+
+  public void setArrayOrNull(final int pos, final Array val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.ARRAY);
+    else
+      stmt.setArray(pos, val);
   }
 
   public void setLong(final int pos, final long v) throws SQLException {
