@@ -22,7 +22,7 @@ public class DBListResultSet<BeanT> extends DBResultSet<List<BeanT>> {
   }
 
   @Override
-  protected void consumeResultSet(ResultSetWrapper rsw) throws SQLException {
+  public void consumeResultSet(ResultSetWrapper rsw) throws SQLException {
     val = new ArrayList<BeanT>();
     for (int i = 0; rsw.next(); i++) {
       val.add(mapper.mapRow(i, rsw));

@@ -1,10 +1,10 @@
 package org.xelasov.ejdbc.base;
 
 import java.io.PrintStream;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.google.common.base.Strings;
 import javax.sql.DataSource;
@@ -30,7 +30,7 @@ public class SqlUtils {
     return sb.toString();
   }
 
-  public static void closeSafely(final CallableStatement stmt) {
+  public static void closeSafely(final Statement stmt) {
     try {
       if (stmt != null)
         stmt.close();

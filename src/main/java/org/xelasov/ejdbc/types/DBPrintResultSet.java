@@ -15,7 +15,7 @@ public class DBPrintResultSet extends DBResultSet<Void> {
   }
 
   @Override
-  protected void consumeResultSet(ResultSetWrapper rsw) throws SQLException {
+  public void consumeResultSet(ResultSetWrapper rsw) throws SQLException {
 
     SqlUtils.printResultSet(rsw, out);
   }

@@ -32,6 +32,6 @@ public abstract class DBResultSet<BeanT> extends Parameter<BeanT> {
     }
   }
 
-  protected abstract void consumeResultSet(ResultSetWrapper rsw) throws SQLException;
+  public abstract void consumeResultSet(ResultSetWrapper rsw) throws SQLException;
 
 }

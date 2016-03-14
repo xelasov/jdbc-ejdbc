@@ -9,7 +9,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * processes ResultSet that contains 0 or 1 rows and converts it to null or an object of type BeanT
- *
  */
 public class DBBeanResultSet<BeanT> extends DBResultSet<BeanT> {
 
@@ -21,7 +20,7 @@ public class DBBeanResultSet<BeanT> extends DBResultSet<BeanT> {
   }
 
   @Override
-  protected void consumeResultSet(ResultSetWrapper rsw) throws SQLException {
+  public void consumeResultSet(ResultSetWrapper rsw) throws SQLException {
     if (rsw.next())
       val = mapper.mapRow(1, rsw);
   }
