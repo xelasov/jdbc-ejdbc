@@ -15,17 +15,29 @@ import org.xelasov.ejdbc.types.DBString;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-public class Function<T> {
+/**
+ * Function class is a simple way to execute a database function-style stored procedure (one that returns a single return value).
+ * Output parameters are also supported.
+ * <p>
+ * For example, to call a sproc that takes user id and password, creates a 'user' record and returns its PK as a long:
+ * <p>
+ * Long pk = new Function<Long>(new DBLong(), "account.user_add").inString(userId).inString(passwd).execute(dataSource);
+ * <p>
+ * To call a sproc that takes user PK and returns a single-row ResultSet with all fields in the user record:
+ * <p>
+ * User user = new Function<User>(new DBBeanResultSet<User>(new UserRowMapper()), "account.user_get").inLong(userPK).execute(dataSource);
+ */
+public class Function<RetValT> {
 
-  private final String        name;
-  private final Parameter<T>  retVal;
-  private final ParameterList params;
+  private final String             name;
+  private final Parameter<RetValT> retVal;
+  private final ParameterList      params;
 
-  public Function(final Parameter<T> retVal, final String name, final Parameter<?>... params) {
+  public Function(final Parameter<RetValT> retVal, final String name, final Parameter<?>... params) {
     this(retVal, name, new ParameterList(params));
   }
 
-  public Function(Parameter<T> retVal, final String name, ParameterList params) {
+  public Function(Parameter<RetValT> retVal, final String name, ParameterList params) {
     checkArgument(!Strings.isNullOrEmpty(name));
     checkArgument(retVal == null || retVal.isOutput());
     checkArgument(params != null);
@@ -35,28 +47,28 @@ public class Function<T> {
     this.params = params;
   }
 
-  public Function<T> inLong(Long v) {
+  public Function<RetValT> inLong(Long v) {
     params.addParameter(new DBLong(v));
     return this;
   }
 
-  public Function<T> inString(String v) {
+  public Function<RetValT> inString(String v) {
     params.addParameter(new DBString(v));
     return this;
   }
 
-  public Function<T> inBool(Boolean v) {
+  public Function<RetValT> inBool(Boolean v) {
     params.addParameter(new DBBool(v));
     return this;
   }
 
-  public Function<T> inByte(Byte v) {
+  public Function<RetValT> inByte(Byte v) {
     params.addParameter(new DBByte(v));
     return this;
   }
 
 
-  public T execute(Connection conn) throws SQLException {
+  public RetValT execute(Connection conn) throws SQLException {
     checkArgument(conn != null);
 
     CallableStatement stmt = null;
@@ -73,12 +85,12 @@ public class Function<T> {
     }
   }
 
-  public T execute(DataSource ds) throws SQLException {
+  public RetValT execute(DataSource ds) throws SQLException {
     checkArgument(ds != null);
 
     final Connection conn = SqlUtils.getConnection(ds, false);
     try {
-      final T rv = execute(conn);
+      final RetValT rv = execute(conn);
       SqlUtils.commitSafely(conn);
       return rv;
     } catch (SQLException e) {
