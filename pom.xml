@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.xelasov</groupId>
   <artifactId>ejdbc</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>e-jdbc</name>
   <dependencies>
     <dependency>
