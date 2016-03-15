@@ -4,16 +4,14 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.google.common.base.Strings;
 import javax.sql.DataSource;
+import org.xelasov.ejdbc.base.Assert;
 import org.xelasov.ejdbc.base.CallableStatementWrapper;
 import org.xelasov.ejdbc.base.SqlUtils;
 import org.xelasov.ejdbc.types.DBBool;
 import org.xelasov.ejdbc.types.DBByte;
 import org.xelasov.ejdbc.types.DBLong;
 import org.xelasov.ejdbc.types.DBString;
-
-import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * Function class is a simple way to execute a database function-style stored procedure (one that returns a single return value).
@@ -38,9 +36,9 @@ public class Function<RetValT> {
   }
 
   public Function(Parameter<RetValT> retVal, final String name, ParameterList params) {
-    checkArgument(!Strings.isNullOrEmpty(name));
-    checkArgument(retVal == null || retVal.isOutput());
-    checkArgument(params != null);
+    Assert.argument(name != null && !name.isEmpty());
+    Assert.argument(retVal == null || retVal.isOutput());
+    Assert.argumentNotNull(params);
 
     this.name = name;
     this.retVal = retVal;
@@ -69,7 +67,7 @@ public class Function<RetValT> {
 
 
   public RetValT execute(Connection conn) throws SQLException {
-    checkArgument(conn != null);
+    Assert.argumentNotNull(conn);
 
     CallableStatement stmt = null;
     try {
@@ -86,7 +84,7 @@ public class Function<RetValT> {
   }
 
   public RetValT execute(DataSource ds) throws SQLException {
-    checkArgument(ds != null);
+    Assert.argumentNotNull(ds);
 
     final Connection conn = SqlUtils.getConnection(ds, false);
     try {

@@ -6,7 +6,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.google.common.base.Strings;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +24,16 @@ public class SqlUtils {
     if (paramCnt > 0)
       sb.append("?");
     if (paramCnt > 1)
-      sb.append(Strings.repeat(",?", paramCnt - 1));
+      sb.append(repeat(",?", paramCnt - 1));
     sb.append(") }");
+    return sb.toString();
+  }
+
+  public static String repeat(String v, int cnt) {
+    final StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < cnt; i++) {
+      sb.append(v);
+    }
     return sb.toString();
   }
 

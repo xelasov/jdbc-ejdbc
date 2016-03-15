@@ -7,14 +7,12 @@ import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.Date;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 public class PreparedStatementWrapper {
 
   private final PreparedStatement stmt;
 
   public PreparedStatementWrapper(PreparedStatement stmt) {
-    checkArgument(stmt != null);
+    Assert.argumentNotNull(stmt);
     this.stmt = stmt;
   }
 

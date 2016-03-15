@@ -3,7 +3,6 @@ package org.xelasov.ejdbc.types;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import com.google.common.base.Strings;
 import org.xelasov.ejdbc.Parameter;
 import org.xelasov.ejdbc.base.CallableStatementWrapper;
 
@@ -36,6 +35,6 @@ public class DBString extends Parameter<String> {
   }
 
   public String getValue() {
-    return Strings.nullToEmpty(val);
+    return val == null ? "" : val;
   }
 }

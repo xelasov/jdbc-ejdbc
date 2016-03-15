@@ -4,14 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 public class ResultSetWrapper {
 
   private final ResultSet rs;
 
   public ResultSetWrapper(final ResultSet rs) {
-    checkArgument(rs != null);
+    Assert.argumentNotNull(rs);
     this.rs = rs;
   }
 
