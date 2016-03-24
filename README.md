@@ -21,7 +21,7 @@ final Long pk = new Function(new DBLong(), "account.create_user", new DBString(u
 final Long pk = new Function(new DBLong(), "account.create_user").inString(userName).inString(passWord).execute(ds);
 ```
 * A more complicated example: stored procedure returns a ResultSet that contain zero or one row.
-    1. Define a bean to store our retrieved record (if any):
+    * Define a bean to store our retrieved record (if any):
     ```
     public class User {
       public final long userId;
@@ -33,7 +33,7 @@ final Long pk = new Function(new DBLong(), "account.create_user").inString(userN
       }
     }
     ```
-    2. Define a RowMapper class to convert a row from the ResultSet to an instance of our data bean:
+    * Define a RowMapper class to convert a row from the ResultSet to an instance of our data bean:
     ```
     public class UserRowMapper implements RowMapper<User> {
 
@@ -43,7 +43,7 @@ final Long pk = new Function(new DBLong(), "account.create_user").inString(userN
 
     }
     ```
-    3. Call the stored procedure:
+    * Call the stored procedure:
     ```
     final User user = new Function<User>(new DBBeanResultSet(new UserMapper()), "account.get_user_by_id").inLong(userId).execute(ds);
     if (user == null) System.out.println("User does not exist");
