@@ -48,6 +48,7 @@ final Long pk = new Function(new DBLong(), "account.create_user").inString(userN
     final User user = new Function<User>(new DBBeanResultSet(new UserMapper()), "account.get_user_by_id").inLong(userId).execute(ds);
     if (user == null) System.out.println("User does not exist");
     ```
+    
 * Calling a procedure that returns multiple Users is easy, too:
     ```
     final List<User> users = new Function<List<User>>(new DBListResultSet<User>(new UserMapper()), "account.get_all_users").execute(ds);
