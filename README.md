@@ -6,7 +6,7 @@ A wrapper library around JDBC interfaces to make working with JDBC easy
 ## Function
 Function class is used to call stored procedures that return a single value, which could be a ResultSet.
 
-1. Call a stored procedure that takes two input parameters (Strings) and returns a long value:
+* Call a stored procedure that takes two input parameters (Strings) and returns a long value
 ```
 final String userName = ...;
 final String passWord = ...;
@@ -20,8 +20,7 @@ final Long pk = new Function(new DBLong(), "account.create_user", new DBString(u
 //
 final Long pk = new Function(new DBLong(), "account.create_user").inString(userName).inString(passWord).execute(ds);
 ```
-
-2. A more complicated example: stored procedure returns a ResultSet that contain zero or one row.
+* A more complicated example: stored procedure returns a ResultSet that contain zero or one row.
     1. Define a bean to store our retrieved record (if any):
     ```
     public class User {
@@ -49,7 +48,7 @@ final Long pk = new Function(new DBLong(), "account.create_user").inString(userN
     final User user = new Function<User>(new DBBeanResultSet(new UserMapper()), "account.get_user_by_id").inLong(userId).execute(ds);
     if (user == null) System.out.println("User does not exist");
     ```
-3. Calling a procedure that returns multiple Users is easy, too:
+* Calling a procedure that returns multiple Users is easy, too:
     ```
     final List<User> users = new Function<List<User>>(new DBListResultSet<User>(new UserMapper()), "account.get_all_users").execute(ds);
     ```
