@@ -5,6 +5,7 @@ A wrapper library around JDBC interfaces to make working with JDBC easy
 # USAGE
 ## Function
 Function class is used to call stored procedures that return a single value, which could be a ResultSet.
+
 1. Call a stored procedure that takes two input parameters (Strings) and returns a long value:
 ```
 final String userName = ...;
