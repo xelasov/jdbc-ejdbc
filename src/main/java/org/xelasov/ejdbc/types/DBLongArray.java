@@ -35,8 +35,10 @@ public class DBLongArray extends Parameter<Long[]> {
   @Override
   public void apply(CallableStatementWrapper stmt, int pos) throws SQLException {
     if (isInput()) {
-      final Array arr = stmt.getCallableStatement().getConnection().createArrayOf("int8", val);
-      stmt.setArray(pos, arr);
+      Array arr = null;
+      if(val != null)
+        arr = stmt.getCallableStatement().getConnection().createArrayOf("int8", val);
+      stmt.setArrayOrNull(pos, arr);
     }
     if (isOutput())
       stmt.registerOutParameter(pos, Types.ARRAY);
