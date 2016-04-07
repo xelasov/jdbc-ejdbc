@@ -32,13 +32,14 @@ public class DBLongArray extends Parameter<Long[]> {
     return (list == null) ? null : list.toArray(EMPTY_ARRAY);
   }
 
+  private static Array makeArray(CallableStatementWrapper stmt, Long[] val) throws SQLException {
+    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf("int8", val);
+  }
+
   @Override
   public void apply(CallableStatementWrapper stmt, int pos) throws SQLException {
     if (isInput()) {
-      Array arr = null;
-      if(val != null)
-        arr = stmt.getCallableStatement().getConnection().createArrayOf("int8", val);
-      stmt.setArrayOrNull(pos, arr);
+      stmt.setArrayOrNull(pos, makeArray(stmt, val));
     }
     if (isOutput())
       stmt.registerOutParameter(pos, Types.ARRAY);
