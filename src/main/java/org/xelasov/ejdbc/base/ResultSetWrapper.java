@@ -2,7 +2,10 @@ package org.xelasov.ejdbc.base;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class ResultSetWrapper {
 
@@ -44,24 +47,24 @@ public class ResultSetWrapper {
       return new Boolean(1 == b.byteValue());
   }
 
-  public Date getDate(final int pos) throws SQLException {
+  public LocalDate getDate(final int pos) throws SQLException {
     final java.sql.Date rv = rs.getDate(pos);
-    return rs.wasNull() || rv == null ? new Date(0) : new Date(rv.getTime());
+    return rs.wasNull() || rv == null ? LocalDate.from(Instant.EPOCH) : rv.toLocalDate();
   }
 
-  public Date getDateOrNull(final int pos) throws SQLException {
+  public LocalDate getDateOrNull(final int pos) throws SQLException {
     final java.sql.Date rv = rs.getDate(pos);
-    return rs.wasNull() || rv == null ? null : new Date(rv.getTime());
+    return rs.wasNull() || rv == null ? null : rv.toLocalDate();
   }
 
-  public Date getDateTime(final int pos) throws SQLException {
+  public LocalDateTime getDateTime(final int pos) throws SQLException {
     final java.sql.Timestamp rv = rs.getTimestamp(pos);
-    return rs.wasNull() || rv == null ? new Date(0) : new Date(rv.getTime());
+    return rs.wasNull() || rv == null ? LocalDateTime.from(Instant.EPOCH) : rv.toLocalDateTime();
   }
 
-  public Date getDateTimeOrNull(final int pos) throws SQLException {
+  public LocalDateTime getDateTimeOrNull(final int pos) throws SQLException {
     final java.sql.Timestamp rv = rs.getTimestamp(pos);
-    return rs.wasNull() || rv == null ? null : new Date(rv.getTime());
+    return rs.wasNull() || rv == null ? null : rv.toLocalDateTime();
   }
 
   public double getDouble(final int pos) throws SQLException {
@@ -126,14 +129,14 @@ public class ResultSetWrapper {
     return rs.getString(pos);
   }
 
-  public Date getTime(final int pos) throws SQLException {
+  public LocalTime getTime(final int pos) throws SQLException {
     final java.sql.Time rv = rs.getTime(pos);
-    return rs.wasNull() || rv == null ? new Date(0) : new Date(rv.getTime());
+    return rs.wasNull() || rv == null ?  LocalTime.from(Instant.EPOCH): rv.toLocalTime();
   }
 
-  public Date getTimeOrNull(final int pos) throws SQLException {
+  public LocalTime getTimeOrNull(final int pos) throws SQLException {
     final java.sql.Time rv = rs.getTime(pos);
-    return rs.wasNull() || rv == null ? null : new Date(rv.getTime());
+    return rs.wasNull() || rv == null ? null : rv.toLocalTime();
   }
 
 }

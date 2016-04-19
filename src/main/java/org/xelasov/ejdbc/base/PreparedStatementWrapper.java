@@ -3,9 +3,11 @@ package org.xelasov.ejdbc.base;
 import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.sql.Types;
-import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class PreparedStatementWrapper {
 
@@ -38,26 +40,26 @@ public class PreparedStatementWrapper {
       setByte(pos, val.byteValue());
   }
 
-  public void setDate(final int pos, final Date val) throws SQLException {
-    setDateOrNull(pos, val == null ? new Date(0) : val);
+  public void setDate(final int pos, final LocalDate val) throws SQLException {
+    setDateOrNull(pos, val == null ? LocalDate.from(Instant.EPOCH) : val);
   }
 
-  public void setDateOrNull(final int pos, final Date val) throws SQLException {
+  public void setDateOrNull(final int pos, final LocalDate val) throws SQLException {
     if (val == null)
       stmt.setNull(pos, Types.DATE);
     else
-      stmt.setDate(pos, new java.sql.Date(val.getTime()));
+      stmt.setDate(pos, java.sql.Date.valueOf(val));
   }
 
-  public void setDateTime(final int pos, final Date val) throws SQLException {
-    setDateTimeOrNull(pos, val == null ? new Date(0) : val);
+  public void setDateTime(final int pos, final LocalDateTime val) throws SQLException {
+    setDateTimeOrNull(pos, val == null ? LocalDateTime.from(Instant.EPOCH) : val);
   }
 
-  public void setDateTimeOrNull(final int pos, final Date val) throws SQLException {
+  public void setDateTimeOrNull(final int pos, final LocalDateTime val) throws SQLException {
     if (val == null)
       stmt.setNull(pos, Types.TIMESTAMP);
     else
-      stmt.setTimestamp(pos, new Timestamp(val.getTime()));
+      stmt.setTimestamp(pos, java.sql.Timestamp.valueOf(val));
   }
 
   public void setDouble(final int pos, final double v) throws SQLException {
@@ -137,15 +139,15 @@ public class PreparedStatementWrapper {
       stmt.setString(pos, val);
   }
 
-  public void setTime(final int pos, final Date val) throws SQLException {
-    setTimeOrNull(pos, val == null ? new Date(0) : val);
+  public void setTime(final int pos, final LocalTime val) throws SQLException {
+    setTimeOrNull(pos, val == null ? LocalTime.from(Instant.EPOCH) : val);
   }
 
-  public void setTimeOrNull(final int pos, final Date val) throws SQLException {
+  public void setTimeOrNull(final int pos, final LocalTime val) throws SQLException {
     if (val == null)
       stmt.setNull(pos, Types.TIME);
     else
-      stmt.setTime(pos, new java.sql.Time(val.getTime()));
+      stmt.setTime(pos, java.sql.Time.valueOf(val));
   }
 
 }

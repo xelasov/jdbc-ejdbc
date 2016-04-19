@@ -3,7 +3,9 @@ package org.xelasov.ejdbc.base;
 import java.sql.Array;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
-import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class CallableStatementWrapper extends PreparedStatementWrapper {
 
@@ -36,24 +38,24 @@ public class CallableStatementWrapper extends PreparedStatementWrapper {
     return cstmt;
   }
 
-  public Date getDate(final int pos) throws SQLException {
+  public LocalDate getDate(final int pos) throws SQLException {
     final java.sql.Date rv = cstmt.getDate(pos);
-    return cstmt.wasNull() || rv == null ? new Date(0) : new Date(rv.getTime());
+    return cstmt.wasNull() || rv == null ? LocalDate.from(Instant.EPOCH) : rv.toLocalDate();
   }
 
-  public Date getDateOrNull(final int pos) throws SQLException {
+  public LocalDate getDateOrNull(final int pos) throws SQLException {
     final java.sql.Date rv = cstmt.getDate(pos);
-    return cstmt.wasNull() || rv == null ? null : new Date(rv.getTime());
+    return cstmt.wasNull() || rv == null ? null : rv.toLocalDate();
   }
 
-  public Date getDateTime(final int pos) throws SQLException {
+  public LocalDateTime getDateTime(final int pos) throws SQLException {
     final java.sql.Timestamp rv = cstmt.getTimestamp(pos);
-    return cstmt.wasNull() || rv == null ? new Date(0) : new Date(rv.getTime());
+    return cstmt.wasNull() || rv == null ? LocalDateTime.from(Instant.EPOCH) : rv.toLocalDateTime();
   }
 
-  public Date getDateTimeOrNull(final int pos) throws SQLException {
+  public LocalDateTime getDateTimeOrNull(final int pos) throws SQLException {
     final java.sql.Timestamp rv = cstmt.getTimestamp(pos);
-    return cstmt.wasNull() || rv == null ? null : new Date(rv.getTime());
+    return cstmt.wasNull() || rv == null ? null : rv.toLocalDateTime();
   }
 
   public double getDouble(final int pos) throws SQLException {
@@ -126,16 +128,6 @@ public class CallableStatementWrapper extends PreparedStatementWrapper {
   public Boolean getStringToBoolOrNull(final int pos) throws SQLException {
     final String s = getStringOrNull(pos);
     return s == null ? null : new Boolean("Y".equals(s));
-  }
-
-  public Date getTime(final int pos) throws SQLException {
-    final java.sql.Time rv = cstmt.getTime(pos);
-    return cstmt.wasNull() || rv == null ? new Date(0) : new Date(rv.getTime());
-  }
-
-  public Date getTimeOrNull(final int pos) throws SQLException {
-    final java.sql.Time rv = cstmt.getTime(pos);
-    return cstmt.wasNull() || rv == null ? null : new Date(rv.getTime());
   }
 
   public void registerOutParameter(final int pos, final int type) throws SQLException {

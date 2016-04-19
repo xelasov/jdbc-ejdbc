@@ -2,27 +2,24 @@ package org.xelasov.ejdbc.types;
 
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.Date;
+import java.time.Instant;
+import java.time.LocalDate;
 
 import org.xelasov.ejdbc.Parameter;
 import org.xelasov.ejdbc.base.CallableStatementWrapper;
 
-public class DBDate extends Parameter<Date> {
+public class DBDate extends Parameter<LocalDate> {
 
   public DBDate() {
     this(null, Parameter.Mode.out);
   }
 
-  public DBDate(final Date val) {
+  public DBDate(final LocalDate val) {
     this(val, Parameter.Mode.in);
   }
 
-  public DBDate(final Date val, final Parameter.Mode t) {
+  public DBDate(final LocalDate val, final Parameter.Mode t) {
     super(t, val);
-  }
-
-  public DBDate(final long val) {
-    this(new Date(val));
   }
 
   @Override
@@ -42,8 +39,8 @@ public class DBDate extends Parameter<Date> {
   /**
    * @return value; never returns null
    */
-  public Date getValue() {
-    return (val == null) ? new Date(0) : val;
+  public LocalDate getValue() {
+    return (val == null) ? LocalDate.from(Instant.EPOCH) : val;
   }
 
 }
