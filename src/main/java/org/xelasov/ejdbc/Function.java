@@ -3,6 +3,9 @@ package org.xelasov.ejdbc;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.sql.DataSource;
 import org.xelasov.ejdbc.base.Assert;
@@ -10,7 +13,14 @@ import org.xelasov.ejdbc.base.CallableStatementWrapper;
 import org.xelasov.ejdbc.base.SqlUtils;
 import org.xelasov.ejdbc.types.DBBool;
 import org.xelasov.ejdbc.types.DBByte;
+import org.xelasov.ejdbc.types.DBDate;
+import org.xelasov.ejdbc.types.DBDateTime;
+import org.xelasov.ejdbc.types.DBDouble;
+import org.xelasov.ejdbc.types.DBFloat;
+import org.xelasov.ejdbc.types.DBInteger;
 import org.xelasov.ejdbc.types.DBLong;
+import org.xelasov.ejdbc.types.DBLongArray;
+import org.xelasov.ejdbc.types.DBShort;
 import org.xelasov.ejdbc.types.DBString;
 
 /**
@@ -45,11 +55,6 @@ public class Function<RetValT> {
     this.params = params;
   }
 
-  public Function<RetValT> inLong(Long v) {
-    params.addParameter(new DBLong(v));
-    return this;
-  }
-
   public Function<RetValT> inString(String v) {
     params.addParameter(new DBString(v));
     return this;
@@ -65,6 +70,50 @@ public class Function<RetValT> {
     return this;
   }
 
+  public Function<RetValT> inShort(Short v) {
+    params.addParameter(new DBShort(v));
+    return this;
+  }
+
+  public Function<RetValT> inInteger(Integer v) {
+    params.addParameter(new DBInteger(v));
+    return this;
+  }
+
+  public Function<RetValT> inLong(Long v) {
+    params.addParameter(new DBLong(v));
+    return this;
+  }
+
+  public Function<RetValT> inFloat(Float v) {
+    params.addParameter(new DBFloat(v));
+    return this;
+  }
+
+  public Function<RetValT> inDouble(Double v) {
+    params.addParameter(new DBDouble(v));
+    return this;
+  }
+
+  public Function<RetValT> inDate(LocalDate v) {
+    params.addParameter(new DBDate(v));
+    return this;
+  }
+
+  public Function<RetValT> inDateTime(LocalDateTime v) {
+    params.addParameter(new DBDateTime(v));
+    return this;
+  }
+
+  public Function<RetValT> inLongArray(Long[] v) {
+    params.addParameter(new DBLongArray(v));
+    return this;
+  }
+
+  public Function<RetValT> inLongArray(List<Long> v) {
+    params.addParameter(new DBLongArray(v));
+    return this;
+  }
 
   public RetValT execute(Connection conn) throws SQLException {
     Assert.argumentNotNull(conn);
