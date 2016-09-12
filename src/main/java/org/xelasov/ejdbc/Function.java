@@ -18,6 +18,7 @@ import org.xelasov.ejdbc.types.DBDateTime;
 import org.xelasov.ejdbc.types.DBDouble;
 import org.xelasov.ejdbc.types.DBFloat;
 import org.xelasov.ejdbc.types.DBInteger;
+import org.xelasov.ejdbc.types.DBIntegerArray;
 import org.xelasov.ejdbc.types.DBLong;
 import org.xelasov.ejdbc.types.DBLongArray;
 import org.xelasov.ejdbc.types.DBShort;
@@ -112,6 +113,16 @@ public class Function<RetValT> {
 
   public Function<RetValT> inLongArray(List<Long> v) {
     params.addParameter(new DBLongArray(v));
+    return this;
+  }
+  
+  public Function<RetValT> inIntegerArray(Integer[] v) {
+    params.addParameter(new DBIntegerArray(v));
+    return this;
+  }
+
+  public Function<RetValT> inIntegerArray(List<Integer> v) {
+    params.addParameter(new DBIntegerArray(v));
     return this;
   }
 
