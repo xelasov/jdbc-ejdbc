@@ -23,6 +23,7 @@ import org.xelasov.ejdbc.types.DBLong;
 import org.xelasov.ejdbc.types.DBLongArray;
 import org.xelasov.ejdbc.types.DBShort;
 import org.xelasov.ejdbc.types.DBString;
+import org.xelasov.ejdbc.types.DBStringArray;
 
 /**
  * Function class is a simple way to execute a database function-style stored procedure (one that returns a single return value).
@@ -123,6 +124,16 @@ public class Function<RetValT> {
 
   public Function<RetValT> inIntegerArray(List<Integer> v) {
     params.addParameter(new DBIntegerArray(v));
+    return this;
+  }
+
+  public Function<RetValT> inStringArray(String[] v) {
+    params.addParameter(new DBStringArray(v));
+    return this;
+  }
+
+  public Function<RetValT> inStringArray(List<String> v) {
+    params.addParameter(new DBStringArray(v));
     return this;
   }
 
