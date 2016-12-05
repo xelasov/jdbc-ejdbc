@@ -22,6 +22,7 @@ import org.xelasov.ejdbc.types.DBIntegerArray;
 import org.xelasov.ejdbc.types.DBLong;
 import org.xelasov.ejdbc.types.DBLongArray;
 import org.xelasov.ejdbc.types.DBShort;
+import org.xelasov.ejdbc.types.DBShortArray;
 import org.xelasov.ejdbc.types.DBString;
 import org.xelasov.ejdbc.types.DBStringArray;
 
@@ -107,6 +108,16 @@ public class Function<RetValT> {
     return this;
   }
 
+  public Function<RetValT> inShortArray(Short[] v) {
+    params.addParameter(new DBShortArray(v));
+    return this;
+  }
+
+  public Function<RetValT> inShortArray(List<Short> v) {
+    params.addParameter(new DBShortArray(v));
+    return this;
+  }
+
   public Function<RetValT> inLongArray(Long[] v) {
     params.addParameter(new DBLongArray(v));
     return this;
@@ -116,7 +127,7 @@ public class Function<RetValT> {
     params.addParameter(new DBLongArray(v));
     return this;
   }
-  
+
   public Function<RetValT> inIntegerArray(Integer[] v) {
     params.addParameter(new DBIntegerArray(v));
     return this;
