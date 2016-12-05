@@ -33,7 +33,7 @@ public class DBStringArray extends Parameter<String[]> {
   }
 
   private static Array makeArray(CallableStatementWrapper stmt, String[] val) throws SQLException {
-    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf("text", val);
+    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf("VARCHAR", val);
   }
 
   @Override
