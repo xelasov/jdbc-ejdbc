@@ -1,5 +1,11 @@
 # Change Log
 
+## tag: [v2.4.0] - Date: 06-12-2016
+### Added:
+- Support for more Array data types: Boolean Array, Byte Array, Double Array, Float Array
+- Ability to override typeName used to instantiate Array Types; now different JDBC drivers can be supported without code changes 
+- Change Log
+
 ## tag: [v2.3.0] - Date: 05-12-2016
 ### Added:
 - Support for String Array data type
