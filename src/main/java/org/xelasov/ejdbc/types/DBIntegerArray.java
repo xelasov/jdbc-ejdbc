@@ -10,7 +10,10 @@ import org.xelasov.ejdbc.base.CallableStatementWrapper;
 
 public class DBIntegerArray extends Parameter<Integer[]> {
 
-  private static final Integer[] EMPTY_ARRAY = new Integer[0];
+  private static final Integer[] EMPTY_ARRAY     = new Integer[0];
+  private static final String    defaultTypeName = "int";
+
+  private static String typeName = defaultTypeName;
 
   public DBIntegerArray() {
     this(Parameter.Mode.out, null);
@@ -28,12 +31,18 @@ public class DBIntegerArray extends Parameter<Integer[]> {
     super(mode, val);
   }
 
+  public static void setTypeName(final String v) {
+    if (v != null && v.length() > 0) {
+      typeName = v;
+    }
+  }
+
   private static Integer[] toArray(List<Integer> list) {
     return (list == null) ? null : list.toArray(EMPTY_ARRAY);
   }
 
   private static Array makeArray(CallableStatementWrapper stmt, Integer[] val) throws SQLException {
-    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf("int", val);
+    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf(typeName, val);
   }
 
   @Override

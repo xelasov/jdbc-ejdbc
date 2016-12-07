@@ -10,7 +10,10 @@ import org.xelasov.ejdbc.base.CallableStatementWrapper;
 
 public class DBLongArray extends Parameter<Long[]> {
 
-  private static final Long[] EMPTY_ARRAY = new Long[0];
+  private static final Long[] EMPTY_ARRAY     = new Long[0];
+  private static final String defaultTypeName = "int8";
+
+  private static String typeName = defaultTypeName;
 
   public DBLongArray() {
     this(Parameter.Mode.out, null);
@@ -28,12 +31,18 @@ public class DBLongArray extends Parameter<Long[]> {
     super(mode, val);
   }
 
+  public static void setTypeName(final String v) {
+    if (v != null && v.length() > 0) {
+      typeName = v;
+    }
+  }
+
   private static Long[] toArray(List<Long> list) {
     return (list == null) ? null : list.toArray(EMPTY_ARRAY);
   }
 
   private static Array makeArray(CallableStatementWrapper stmt, Long[] val) throws SQLException {
-    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf("int8", val);
+    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf(typeName, val);
   }
 
   @Override

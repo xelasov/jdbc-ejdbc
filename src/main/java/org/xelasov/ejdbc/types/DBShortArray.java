@@ -10,7 +10,10 @@ import org.xelasov.ejdbc.base.CallableStatementWrapper;
 
 public class DBShortArray extends Parameter<Short[]> {
 
-  private static final Short[] EMPTY_ARRAY = new Short[0];
+  public static final  String  defaultTypeName = "smallint";
+  private static final Short[] EMPTY_ARRAY     = new Short[0];
+
+  private static String typeName = defaultTypeName;
 
   public DBShortArray() {
     this(Parameter.Mode.out, null);
@@ -28,12 +31,18 @@ public class DBShortArray extends Parameter<Short[]> {
     super(mode, val);
   }
 
+  public static void setTypeName(final String v) {
+    if (v != null && v.length() > 0) {
+      typeName = v;
+    }
+  }
+
   private static Short[] toArray(List<Short> list) {
     return (list == null) ? null : list.toArray(EMPTY_ARRAY);
   }
 
   private static Array makeArray(CallableStatementWrapper stmt, Short[] val) throws SQLException {
-    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf("smallint", val);
+    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf(typeName, val);
   }
 
   @Override

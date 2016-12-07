@@ -12,6 +12,10 @@ public class DBStringArray extends Parameter<String[]> {
 
   private static final String[] EMPTY_ARRAY = new String[0];
 
+  private static final String defaultTypeName = "VARCHAR";
+
+  private static String typeName = defaultTypeName;
+
   public DBStringArray() {
     this(Parameter.Mode.out, null);
   }
@@ -28,12 +32,18 @@ public class DBStringArray extends Parameter<String[]> {
     super(mode, val);
   }
 
+  public static void setTypeName(String v) {
+    if (v != null && v.length() > 0) {
+      typeName = v;
+    }
+  }
+
   private static String[] toArray(List<String> list) {
     return (list == null) ? null : list.toArray(EMPTY_ARRAY);
   }
 
   private static Array makeArray(CallableStatementWrapper stmt, String[] val) throws SQLException {
-    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf("VARCHAR", val);
+    return (val == null) ? null : stmt.getCallableStatement().getConnection().createArrayOf(typeName, val);
   }
 
   @Override
