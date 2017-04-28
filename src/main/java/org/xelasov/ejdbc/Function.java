@@ -1,5 +1,6 @@
 package org.xelasov.ejdbc;
 
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import javax.sql.DataSource;
 import org.xelasov.ejdbc.base.Assert;
 import org.xelasov.ejdbc.base.CallableStatementWrapper;
 import org.xelasov.ejdbc.base.SqlUtils;
+import org.xelasov.ejdbc.types.DBBigDecimal;
 import org.xelasov.ejdbc.types.DBBool;
 import org.xelasov.ejdbc.types.DBByte;
 import org.xelasov.ejdbc.types.DBDate;
@@ -65,6 +67,11 @@ public class Function<RetValT> {
 
   public Function<RetValT> inBool(Boolean v) {
     params.addParameter(new DBBool(v));
+    return this;
+  }
+  
+  public Function<RetValT> inBigDecimal(BigDecimal v) {
+    params.addParameter(new DBBigDecimal(v));
     return this;
   }
 
