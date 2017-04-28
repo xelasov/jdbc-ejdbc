@@ -1,5 +1,6 @@
 package org.xelasov.ejdbc.base;
 
+import java.math.BigDecimal;
 import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -27,6 +28,17 @@ public class PreparedStatementWrapper {
       stmt.setNull(pos, Types.BOOLEAN);
     else
       setBool(pos, val.booleanValue());
+  }
+  
+  public void setBigDecimal(final int pos, final BigDecimal val) throws SQLException {
+    stmt.setBigDecimal(pos, val);
+  }
+  
+  public void setBigDecimalOrNull(final int pos, final BigDecimal val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.NUMERIC);
+    else
+      setBigDecimal(pos, val);
   }
 
   public void setByte(final int pos, final byte val) throws SQLException {

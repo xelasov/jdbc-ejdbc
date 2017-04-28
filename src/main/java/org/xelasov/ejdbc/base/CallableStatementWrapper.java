@@ -1,5 +1,6 @@
 package org.xelasov.ejdbc.base;
 
+import java.math.BigDecimal;
 import java.sql.Array;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
@@ -23,6 +24,15 @@ public class CallableStatementWrapper extends PreparedStatementWrapper {
   public Byte getByteOrNull(final int pos) throws SQLException {
     final byte rv = cstmt.getByte(pos);
     return cstmt.wasNull() ? null : new Byte(rv);
+  }
+  
+  public BigDecimal getBigDecimal(final int pos) throws SQLException {
+    return cstmt.getBigDecimal(pos);
+  }
+  
+  public BigDecimal getBigDecimalOrNull(final int pos) throws SQLException {
+    final BigDecimal rv = cstmt.getBigDecimal(pos);
+    return cstmt.wasNull() ? null : rv;
   }
 
   public Boolean getBoolOrNull(final int pos) throws SQLException {
