@@ -1,5 +1,6 @@
 package org.xelasov.ejdbc.base;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -23,6 +24,15 @@ public class ResultSetWrapper {
   public Boolean getBoolOrNull(final int pos) throws SQLException {
     final boolean rv = rs.getBoolean(pos);
     return rs.wasNull() ? null : new Boolean(rv);
+  }
+  
+  public BigDecimal getBigDecimal(final int pos) throws SQLException {
+    return rs.getBigDecimal(pos);
+  }
+
+  public BigDecimal getBigDecimalOrNull(final int pos) throws SQLException {
+    final BigDecimal rv = rs.getBigDecimal(pos);
+    return rs.wasNull() ? null : rv;
   }
 
   public byte getByte(final int pos) throws SQLException {
