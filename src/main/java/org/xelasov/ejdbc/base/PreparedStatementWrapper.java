@@ -31,7 +31,7 @@ public class PreparedStatementWrapper {
   }
   
   public void setBigDecimal(final int pos, final BigDecimal val) throws SQLException {
-    stmt.setBigDecimal(pos, val);
+    stmt.setBigDecimal(pos, val == null ? BigDecimal.ZERO : val);
   }
   
   public void setBigDecimalOrNull(final int pos, final BigDecimal val) throws SQLException {

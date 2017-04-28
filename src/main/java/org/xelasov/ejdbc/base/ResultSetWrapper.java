@@ -25,14 +25,17 @@ public class ResultSetWrapper {
     final boolean rv = rs.getBoolean(pos);
     return rs.wasNull() ? null : new Boolean(rv);
   }
-  
+
+  /**
+   * @return Never returns null; returns BigDecimal.ZERO if wasNull() == true
+   */
   public BigDecimal getBigDecimal(final int pos) throws SQLException {
-    return rs.getBigDecimal(pos);
+    final BigDecimal rv = rs.getBigDecimal(pos);
+    return rv == null ? BigDecimal.ZERO : rv;
   }
 
   public BigDecimal getBigDecimalOrNull(final int pos) throws SQLException {
-    final BigDecimal rv = rs.getBigDecimal(pos);
-    return rs.wasNull() ? null : rv;
+    return rs.getBigDecimal(pos);
   }
 
   public byte getByte(final int pos) throws SQLException {
@@ -51,10 +54,7 @@ public class ResultSetWrapper {
 
   public Boolean getByteBoolOrNull(final int pos) throws SQLException {
     final Byte b = getByteOrNull(pos);
-    if (b == null)
-      return null;
-    else
-      return new Boolean(1 == b.byteValue());
+    return (b == null) ? null : new Boolean(1 == b.byteValue());
   }
 
   public LocalDate getDate(final int pos) throws SQLException {
