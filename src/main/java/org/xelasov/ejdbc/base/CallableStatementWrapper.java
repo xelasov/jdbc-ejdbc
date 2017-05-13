@@ -29,12 +29,12 @@ public class CallableStatementWrapper extends PreparedStatementWrapper {
   }
   
   public BigDecimal getBigDecimal(final int pos) throws SQLException {
-    return cstmt.getBigDecimal(pos);
+    final BigDecimal rv = cstmt.getBigDecimal(pos);
+    return cstmt.wasNull() ? BigDecimal.ZERO : rv;
   }
   
   public BigDecimal getBigDecimalOrNull(final int pos) throws SQLException {
-    final BigDecimal rv = cstmt.getBigDecimal(pos);
-    return cstmt.wasNull() ? null : rv;
+    return cstmt.getBigDecimal(pos);
   }
 
   public Boolean getBoolOrNull(final int pos) throws SQLException {
