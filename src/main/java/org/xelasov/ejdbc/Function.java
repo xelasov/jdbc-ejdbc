@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -27,6 +28,7 @@ import org.xelasov.ejdbc.types.DBShort;
 import org.xelasov.ejdbc.types.DBShortArray;
 import org.xelasov.ejdbc.types.DBString;
 import org.xelasov.ejdbc.types.DBStringArray;
+import org.xelasov.ejdbc.types.DBZonedDateTime;
 
 /**
  * Function class is a simple way to execute a database function-style stored procedure (one that returns a single return value).
@@ -112,6 +114,11 @@ public class Function<RetValT> {
 
   public Function<RetValT> inDateTime(LocalDateTime v) {
     params.addParameter(new DBDateTime(v));
+    return this;
+  }
+  
+  public Function<RetValT> inZonedDateTime(ZonedDateTime v) {
+    params.addParameter(new DBZonedDateTime(v));
     return this;
   }
 

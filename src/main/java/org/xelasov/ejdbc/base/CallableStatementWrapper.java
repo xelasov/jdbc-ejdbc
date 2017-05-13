@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
 
 public class CallableStatementWrapper extends PreparedStatementWrapper {
 
@@ -66,6 +68,16 @@ public class CallableStatementWrapper extends PreparedStatementWrapper {
   public LocalDateTime getDateTimeOrNull(final int pos) throws SQLException {
     final java.sql.Timestamp rv = cstmt.getTimestamp(pos);
     return cstmt.wasNull() || rv == null ? null : rv.toLocalDateTime();
+  }
+  
+  public ZonedDateTime getZonedDateTime(final int pos) throws SQLException {
+    final OffsetDateTime rv = cstmt.getObject(pos, OffsetDateTime.class);
+    return cstmt.wasNull() || rv == null ? ZonedDateTime.from(Instant.EPOCH) : rv.toZonedDateTime();
+  }
+
+  public ZonedDateTime getZonedDateTimeOrNull(final int pos) throws SQLException {
+    final OffsetDateTime rv = cstmt.getObject(pos, OffsetDateTime.class);
+    return cstmt.wasNull() || rv == null ? null : rv.toZonedDateTime();
   }
 
   public double getDouble(final int pos) throws SQLException {
