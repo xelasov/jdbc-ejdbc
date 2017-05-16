@@ -83,7 +83,7 @@ public class PreparedStatementWrapper {
     if (val == null)
       stmt.setNull(pos, Types.TIMESTAMP);
     else
-      stmt.setTimestamp(pos, java.sql.Timestamp.valueOf(val.toString()));
+      stmt.setObject(pos, val.toOffsetDateTime());
   }
 
   public void setDouble(final int pos, final double v) throws SQLException {
