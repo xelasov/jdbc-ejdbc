@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 
 public class PreparedStatementWrapper {
 
@@ -72,6 +73,17 @@ public class PreparedStatementWrapper {
       stmt.setNull(pos, Types.TIMESTAMP);
     else
       stmt.setTimestamp(pos, java.sql.Timestamp.valueOf(val));
+  }
+  
+  public void setZonedDateTime(final int pos, final ZonedDateTime val) throws SQLException {
+    setZonedDateTimeOrNull(pos, val == null ? ZonedDateTime.from(Instant.EPOCH) : val);
+  }
+
+  public void setZonedDateTimeOrNull(final int pos, final ZonedDateTime val) throws SQLException {
+    if (val == null)
+      stmt.setNull(pos, Types.TIMESTAMP);
+    else
+      stmt.setObject(pos, val.toOffsetDateTime());
   }
 
   public void setDouble(final int pos, final double v) throws SQLException {
