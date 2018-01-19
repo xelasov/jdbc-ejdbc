@@ -1,5 +1,11 @@
 # Change Log
 
+## tag: [v2.5.3] - Date: 01-18-2018
+### Added:
+- Function constructors that don't take RetVal as parameter
+### Fixed
+- NullPointerException in Function.execute(Connection) method
+
 ## tag: [v2.4.0] - Date: 06-12-2016
 ### Added:
 - Support for more Array data types: Boolean Array, Byte Array, Double Array, Float Array
@@ -31,6 +37,10 @@
 Initial release
 
 
+[v2.5.3]: https://github.com/xelasov/jdbc-ejdbc/compare/v2.5.2...v2.5.3
+[v2.5.2]: https://github.com/xelasov/jdbc-ejdbc/compare/v2.5.1...v2.5.2
+[v2.5.1]: https://github.com/xelasov/jdbc-ejdbc/compare/v2.5.0...v2.5.1
+[v2.5.0]: https://github.com/xelasov/jdbc-ejdbc/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/xelasov/jdbc-ejdbc/compare/v2.3.0...v2.4.0
 [v2.3.0]: https://github.com/xelasov/jdbc-ejdbc/compare/v2.2.0...v2.3.0
 [v2.2.0]: https://github.com/xelasov/jdbc-ejdbc/compare/v2.1.0...v2.2.0

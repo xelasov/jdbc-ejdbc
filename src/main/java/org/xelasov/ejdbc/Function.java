@@ -48,8 +48,16 @@ public class Function<RetValT> {
   private final Parameter<RetValT> retVal;
   private final ParameterList      params;
 
+  public Function(final String name, final Parameter<?>... params) {
+    this(null, name, params);
+  }
+
   public Function(final Parameter<RetValT> retVal, final String name, final Parameter<?>... params) {
     this(retVal, name, new ParameterList(params));
+  }
+
+  public Function(final String name, ParameterList params) {
+    this(null, name, params);
   }
 
   public Function(Parameter<RetValT> retVal, final String name, ParameterList params) {
@@ -71,7 +79,7 @@ public class Function<RetValT> {
     params.addParameter(new DBBool(v));
     return this;
   }
-  
+
   public Function<RetValT> inBigDecimal(BigDecimal v) {
     params.addParameter(new DBBigDecimal(v));
     return this;
@@ -116,7 +124,7 @@ public class Function<RetValT> {
     params.addParameter(new DBDateTime(v));
     return this;
   }
-  
+
   public Function<RetValT> inZonedDateTime(ZonedDateTime v) {
     params.addParameter(new DBZonedDateTime(v));
     return this;
@@ -173,7 +181,7 @@ public class Function<RetValT> {
       applyParams(csw);
       stmt.execute();
       extractParams(csw);
-      return retVal.getValueOrNull();
+      return retVal != null ? retVal.getValueOrNull() : null;
     } finally {
       SqlUtils.closeSafely(stmt);
     }

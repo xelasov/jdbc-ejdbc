@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.sql.DataSource;
+import org.xelasov.ejdbc.base.Assert;
 import org.xelasov.ejdbc.base.ResultSetWrapper;
 import org.xelasov.ejdbc.base.SqlUtils;
 import org.xelasov.ejdbc.types.DBResultSet;
@@ -15,6 +16,9 @@ public class Query<RetValT> {
   private final DBResultSet<RetValT> retVal;
 
   public Query(final DBResultSet<RetValT> retVal, final String sql) {
+    Assert.argumentNotNull(retVal );
+    Assert.argumentNotNull(sql);
+
     this.sql = sql;
     this.retVal = retVal;
   }
