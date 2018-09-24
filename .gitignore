@@ -1,3 +1,2 @@
-.idea
-ejdbc.iml
-target
+.gradle
+build
