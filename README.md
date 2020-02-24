@@ -53,5 +53,3 @@ final Long pk = new Function(new DBLong(), "account.create_user").inString(userN
     ```
     final List<User> users = new Function<List<User>>(new DBListResultSet<User>(new UserMapper()), "account.get_all_users").execute(ds);
     ```
-
-
