@@ -1,3 +1,4 @@
+.gradle
 .idea
+build
 ejdbc.iml
-target
