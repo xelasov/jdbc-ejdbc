@@ -18,7 +18,7 @@ import java.sql.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class SqlUtilsTest {
+class SqlUtilsTestNew {
 
     @Mock
     private DataSource mockDataSource;
